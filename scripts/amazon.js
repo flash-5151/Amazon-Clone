@@ -1,3 +1,4 @@
+import { cart } from "../data/cart.js";
 let productsHTML = "";
 products.forEach((product) => {
   productsHTML += `
@@ -49,8 +50,9 @@ products.forEach((product) => {
     </div>
 
     <button class="add-to-cart-button button-primary js-add-to-cart"
-    data-product-id="${product.id}">Add to Cart</button>
-  </div>`;
+    data-product-id="${product.id}" >Add to Cart</button>
+  </div>
+`;
 });
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
@@ -76,5 +78,14 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     });
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
     console.log(cart);
+
+    // // ✅ Show "Added to cart" message for 2 seconds
+    // const productContainer = button.closest(".product-container");
+    // const addedMessage = productContainer.querySelector(".added-to-cart");
+
+    // addedMessage.style.display = "flex"; // show it
+    // setTimeout(() => {
+    //   addedMessage.style.display = "none"; // hide it again
+    // }, 2000);
   });
 });
