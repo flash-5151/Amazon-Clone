@@ -50,7 +50,7 @@ products.forEach((product) => {
       <img src="images/icons/checkmark.png" />
       Added
     </div>
-
+      <p class="js-add-animation-${product.id}"></p>
     <button class="add-to-cart-button button-primary js-add-to-cart"
     data-product-id="${product.id}" >Add to Cart</button>
   </div>
@@ -67,6 +67,18 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
+    document.querySelector(
+      `.js-add-animation-${button.dataset.productId}`
+    ).innerHTML = `Added`;
+    const p = document.querySelector(
+      `.js-add-animation-${button.dataset.productId}`
+    );
+    p.style.textAlign = "center";
+    p.style.color = "white";
+    p.style.backgroundColor = "green";
+    p.style.fontSize = "20px";
+    p.style.border = "0px";
+
     addToCart(productId);
     updateCartQuantity();
   });
