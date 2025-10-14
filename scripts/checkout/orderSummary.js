@@ -6,6 +6,7 @@ import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
+import { renderPaymentSummery } from "./paymentSummery.js";
 
 export function renderOrderSummery() {
   let cartSummeryHTML = "";
@@ -101,6 +102,7 @@ export function renderOrderSummery() {
       const container = document
         .querySelector(`.js-cart-item-container-${productId}`)
         .remove();
+      renderPaymentSummery();
     });
   });
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
@@ -108,6 +110,7 @@ export function renderOrderSummery() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummery();
+      renderPaymentSummery();
     });
   });
 }
