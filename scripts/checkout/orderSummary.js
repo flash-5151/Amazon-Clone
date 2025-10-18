@@ -7,6 +7,7 @@ import {
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummery } from "./paymentSummery.js";
+import { renderHeader } from "./header.js";
 
 export function renderOrderSummery() {
   let cartSummeryHTML = "";
@@ -41,7 +42,12 @@ export function renderOrderSummery() {
           <span> Quantity: <span class="quantity-label">${
             cartItem.quantity
           }</span> </span>
-          <span class="update-quantity-link link-primary">
+          <!-- Update -->
+          <span class="update-quantity-link link-primary js-updating-${
+            cartItem.productId
+          }"
+
+          >
             Update
           </span>
           <span class="delete-quantity-link link-primary js-delete-link" 
@@ -58,7 +64,8 @@ export function renderOrderSummery() {
           ${delivaryOptionsHTML(matchingProduct, cartItem)}
         </div>
     </div>
-  </div>`;
+  </div>
+  `;
   });
   function delivaryOptionsHTML(matchingProduct, cartItem) {
     let html = "";
@@ -103,6 +110,7 @@ export function renderOrderSummery() {
         .querySelector(`.js-cart-item-container-${productId}`)
         .remove();
       renderPaymentSummery();
+      renderHeader();
     });
   });
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
@@ -111,6 +119,58 @@ export function renderOrderSummery() {
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummery();
       renderPaymentSummery();
+      renderHeader();
+    });
+  });
+  let qty = document.querySelector(".quantity-label").innerHTML;
+  function renderQty() {
+    document.querySelector(".quantity-label").innerHTML = qty;
+  }
+  // update
+  // document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     const productId = button.dataset.productId;
+  //     document.querySelector(
+  //       `.js-add-animation-${button.dataset.productId}`
+  //     ).innerHTML = `Added`;
+  cart.forEach((cartItem) => {
+    const updateButton = document.querySelector(
+      `.js-updating-${cartItem.productId}`
+    );
+    updateButton.addEventListener("click", () => {
+      const updateHTML = `
+      <input class='js-input-box-${cartItem.productId}' type='number' value='${cartItem.quantity}' />
+      <button class='js-save-button-${cartItem.productId} update-quantity-link link-primary'>Save</button>
+    `;
+      updateButton.innerHTML = updateHTML;
+
+      const saveButton = document.querySelector(
+        `.js-save-button-${cartItem.productId}`
+      );
+      saveButton.addEventListener("click", () => {
+        const inputBox = document.querySelector(
+          `.js-input-box-${cartItem.productId}`
+        );
+        const newQuantity = parseInt(inputBox.value, 10);
+
+        if (isNaN(newQuantity) || newQuantity <= 0) {
+          alert("Please enter a valid quantity.");
+          return;
+        }
+
+        cartItem.quantity = newQuantity;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        renderOrderSummery();
+        renderPaymentSummery();
+        renderHeader();
+      });
+
+      const inputBox = document.querySelector(
+        `.js-input-box-${cartItem.productId}`
+      );
+      inputBox.focus();
     });
   });
 }
