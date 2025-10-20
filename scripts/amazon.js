@@ -1,10 +1,16 @@
 import { cart, addToCart } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-let productsHTML = "";
-products.forEach((product) => {
-  productsHTML += `
-  <div class="product-container">
+
+loadProducts(() => {
+  renderProductsGrid();
+});
+
+function renderProductsGrid() {
+  let productsHTML = "";
+  products.forEach((product) => {
+    productsHTML += `
+  <div class="product-container"> 
     <div class="product-image-container">
       <img
         class="product-image"
@@ -55,34 +61,35 @@ products.forEach((product) => {
     data-product-id="${product.id}" >Add to Cart</button>
   </div>
 `;
-});
-function updateCartQuantity() {
-  let cartQuantity = 0;
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
   });
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-}
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    const productId = button.dataset.productId;
-    document.querySelector(
-      `.js-add-animation-${button.dataset.productId}`
-    ).innerHTML = `Added`;
-    const p = document.querySelector(
-      `.js-add-animation-${button.dataset.productId}`
-    );
-    p.style.textAlign = "center";
-    p.style.color = "white";
-    p.style.backgroundColor = "green";
-    p.style.fontSize = "20px";
-    p.style.border = "0px";
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  }
+  document.querySelector(".js-products-grid").innerHTML = productsHTML;
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.dataset.productId;
+      document.querySelector(
+        `.js-add-animation-${button.dataset.productId}`
+      ).innerHTML = `Added`;
+      const p = document.querySelector(
+        `.js-add-animation-${button.dataset.productId}`
+      );
+      p.style.textAlign = "center";
+      p.style.color = "white";
+      p.style.backgroundColor = "green";
+      p.style.fontSize = "20px";
+      p.style.border = "0px";
 
-    addToCart(productId);
-    updateCartQuantity();
-    // document.querySelector(
-    //   `.js-add-animation-${button.dataset.productId}`
-    // ).innerHTML = ``;
+      addToCart(productId);
+      updateCartQuantity();
+      // document.querySelector(
+      //   `.js-add-animation-${button.dataset.productId}`
+      // ).innerHTML = ``;
+    });
   });
-});
+}
