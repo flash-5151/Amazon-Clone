@@ -6,6 +6,21 @@ import { renderHeader } from "./checkout/header.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
+async function loadPage() {
+  await loadProductsFetch();
+
+  await new Promise((resolve) => {
+    loadCart(() => {
+      resolve();
+    });
+  });
+
+  renderHeader();
+  renderOrderSummery();
+  renderPaymentSummery();
+}
+loadPage();
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
@@ -18,6 +33,7 @@ Promise.all([
     renderPaymentSummery();
   }),
 ]);
+*/
 
 // loadProducts(() => {
 //   renderHeader();
