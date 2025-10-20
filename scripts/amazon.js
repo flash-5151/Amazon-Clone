@@ -81,5 +81,8 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
     addToCart(productId);
     updateCartQuantity();
+    // document.querySelector(
+    //   `.js-add-animation-${button.dataset.productId}`
+    // ).innerHTML = ``;
   });
 });
