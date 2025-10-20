@@ -3,19 +3,15 @@ import { renderPaymentSummery } from "./checkout/paymentSummery.js";
 import { renderHeader } from "./checkout/header.js";
 // import "../data/cart-class.js";
 // import "../data/backend-practice.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 Promise.all([
+  loadProductsFetch(),
   new Promise((resolve) => {
-    loadProducts(() => {
+    loadCart(() => {
       resolve();
-    }),
-      new Promise((resolve) => {
-        loadCart(() => {
-          resolve();
-        });
-      });
+    });
   }).then(() => {
     renderHeader();
     renderOrderSummery();

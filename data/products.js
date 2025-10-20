@@ -73,7 +73,7 @@ class Appliance extends Product {
 // console.log(date.toLocaleTimeString());
 
 export let products = [];
-/*
+
 export function loadProductsFetch() {
   const promise = fetch("https://supersimplebackend.dev/products")
     .then((response) => {
@@ -92,7 +92,12 @@ export function loadProductsFetch() {
     });
   return promise;
 }
-*/
+
+// loadProductsFetch().then(()=>{
+//   console.log("next step ");
+
+// })
+
 export function loadProducts(fun = () => {}) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener("load", () => {
