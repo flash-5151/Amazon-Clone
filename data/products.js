@@ -49,6 +49,23 @@ class Clothing extends Product {
   }
 }
 
+class Appliance extends Product {
+  instructionsLink;
+  warrantyLink;
+  constructor(productDetails) {
+    super(productDetails);
+    this.warrantyLink = productDetails.warrantyLink;
+    this.instructionsLink = productDetails.instructionsLink;
+  }
+  extraInfoHtml() {
+    return `
+    <a href="${this.instructionsLink}" target="_blank"> instructions</a>
+    <a href="${this.warrantyLink}" target="_blank"> warranty</a>
+
+    `;
+  }
+}
+
 //use dayJs rather than Date() bcz it has extra features
 
 const date = new Date();
@@ -101,6 +118,9 @@ export const products = [
     },
     priceCents: 1899,
     keywords: ["toaster", "kitchen", "appliances"],
+    type: "appliance",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -527,6 +547,9 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails) => {
+  if (productDetails.type === "appliance") {
+    return new Appliance(productDetails);
+  }
   if (productDetails.type === "clothing") {
     return new Clothing(productDetails);
   }
