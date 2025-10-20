@@ -37,7 +37,7 @@ export function renderOrderSummery() {
             ${matchingProduct.name}
           </div>
           <div class="product-price">${matchingProduct.getPrice()}
-          )}</div>
+          </div>
         <div class="product-quantity js-product-quantity-${matchingProduct.id}">
           <span>   <span class="quantity-label">${
             cartItem.quantity
