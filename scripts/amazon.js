@@ -3,11 +3,15 @@ import { products, loadProducts } from "../data/products.js";
 
 const renderDetails = document.querySelector(".js-products-grid");
 renderDetails.innerHTML = "Loading...";
+renderDetails.style.display = "flex";
+renderDetails.style.justifyContent = "center";
+renderDetails.style.alignItems = "center";
+renderDetails.style.minHeight = "300px"; // important for vertical centering
+renderDetails.style.fontSize = "20px";
+renderDetails.style.fontWeight = "500";
 
 loadProducts(() => {
-  setTimeout(() => {
-    renderProductsGrid();
-  }, 1000);
+  renderProductsGrid();
 });
 
 function renderProductsGrid() {
@@ -67,6 +71,13 @@ function renderProductsGrid() {
 `;
   });
   renderDetails.innerHTML = productsHTML;
+  renderDetails.innerHTML = productsHTML;
+
+  // reset layout back to grid
+  renderDetails.style.display = "grid";
+  renderDetails.style.justifyContent = "";
+  renderDetails.style.alignItems = "";
+  renderDetails.style.minHeight = "";
 
   function updateCartQuantity() {
     let cartQuantity = 0;
