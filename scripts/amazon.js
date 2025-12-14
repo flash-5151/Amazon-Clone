@@ -71,13 +71,14 @@ function renderProductsGrid() {
 `;
   });
   renderDetails.innerHTML = productsHTML;
-  renderDetails.innerHTML = productsHTML;
 
-  // reset layout back to grid
-  renderDetails.style.display = "grid";
+  // remove ONLY inline styles you added
+  renderDetails.style.display = "";
   renderDetails.style.justifyContent = "";
   renderDetails.style.alignItems = "";
   renderDetails.style.minHeight = "";
+  renderDetails.style.fontSize = "";
+  renderDetails.style.fontWeight = "";
 
   function updateCartQuantity() {
     let cartQuantity = 0;
