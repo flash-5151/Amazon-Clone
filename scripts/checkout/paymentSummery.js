@@ -2,9 +2,11 @@ import { cart, countQuantity } from "../../data/cart.js";
 import { getproduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
-// import { jsx } from "react/jsx-runtime";
 import { addOrder } from "../../data/orders.js";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
+let totalPrice = 0;
+let totalCents = 0;
 export function renderPaymentSummery() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
@@ -17,7 +19,8 @@ export function renderPaymentSummery() {
   });
   const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
   const taxCents = totalBeforeTaxCents * 0.1;
-  const totalCents = totalBeforeTaxCents + taxCents;
+  totalCents = totalBeforeTaxCents + taxCents;
+  totalPrice = totalCents;
   const paymentSummeryHTML = `
   <div class="payment-summary-title">Order Summary</div>
 
@@ -57,24 +60,69 @@ export function renderPaymentSummery() {
     </button>
   `;
   document.querySelector(".js-payment-summary").innerHTML = paymentSummeryHTML;
+  //   document
+  //     .querySelector(".js-place-order")
+  //     .addEventListener("click", async () => {
+  //       try {
+  //         const response = await fetch("https://supersimplebackend.dev/orders", {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             cart: cart,
+  //           }),
+  //         });
+  //         const order = await response.json();
+
+  //         addOrder(order);
+  //       } catch (error) {
+  //         console.log("error");
+  //       }
+  //       window.location.href = "orders.html";
+  //     });
+  //
   document
     .querySelector(".js-place-order")
     .addEventListener("click", async () => {
+      const orderItems = cart.map((cartItem) => {
+        const product = getproduct(cartItem.productId);
+        const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
+
+        const deliveryDate = dayjs()
+          .add(deliveryOption.delivaryDays, "days")
+          .toISOString();
+        return {
+          productId: product.id,
+          name: product.name,
+          image: product.image,
+          priceCents: product.priceCents,
+          quantity: cartItem.quantity,
+          arrivingDate: deliveryDate,
+        };
+      });
+
+      const orderData = {
+        id: crypto.randomUUID(),
+        items: orderItems,
+        totalCents: totalCents,
+        orderDate: dayjs().toISOString(),
+      };
+
       try {
-        const response = await fetch("https://supersimplebackend.dev/orders", {
+        await fetch("https://supersimplebackend.dev/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            cart: cart,
-          }),
+          body: JSON.stringify({ cart }),
         });
-        const order = await response.json();
-        addOrder(order);
+
+        addOrder(orderData); // ✅ SAVE FULL DETAILS
       } catch (error) {
         console.log("error");
       }
+
       window.location.href = "orders.html";
     });
 }

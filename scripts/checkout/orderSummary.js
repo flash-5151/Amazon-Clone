@@ -98,6 +98,7 @@ export function renderOrderSummery() {
         </div>
       </div>`;
     });
+
     return html;
   }
 
@@ -127,13 +128,7 @@ export function renderOrderSummery() {
   function renderQty() {
     document.querySelector(".quantity-label").innerHTML = qty;
   }
-  // update
-  // document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     const productId = button.dataset.productId;
-  //     document.querySelector(
-  //       `.js-add-animation-${button.dataset.productId}`
-  //     ).innerHTML = `Added`;
+
   cart.forEach((cartItem) => {
     const updateButton = document.querySelector(
       `.js-updating-${cartItem.productId}`

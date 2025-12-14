@@ -73,23 +73,26 @@ function renderProductsGrid() {
   document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
-      document.querySelector(
-        `.js-add-animation-${button.dataset.productId}`
-      ).innerHTML = `Added`;
       const p = document.querySelector(
         `.js-add-animation-${button.dataset.productId}`
       );
-      p.style.textAlign = "center";
+      p.innerHTML = `Added`;
+      p.style.marginBottom = "5px";
+      p.style.display = "flex";
+      p.style.alignItems = "center";
+      p.style.justifyContent = "center";
       p.style.color = "white";
       p.style.backgroundColor = "green";
-      p.style.fontSize = "20px";
+      p.style.fontSize = "16px";
       p.style.border = "0px";
-
+      p.style.borderRadius = "50px";
+      p.style.height = "30px";
       addToCart(productId);
       updateCartQuantity();
-      // document.querySelector(
-      //   `.js-add-animation-${button.dataset.productId}`
-      // ).innerHTML = ``;
+      setTimeout(() => {
+        p.innerHTML = "";
+        p.style.display = "none";
+      }, 1000);
     });
   });
 }
