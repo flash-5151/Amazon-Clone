@@ -5,7 +5,7 @@ export function renderHeader() {
   <div class="checkout-header">
         <div class="header-content">
           <div class="checkout-header-left-section">
-            <a href="amazon.html">
+            <a href="index.html">
               <img class="amazon-logo" src="images/amazon-logo.png" />
               <img
                 class="amazon-mobile-logo"
@@ -17,7 +17,7 @@ export function renderHeader() {
           <div class="checkout-header-middle-section">
             Checkout(<a
               class="return-to-home-link js-checkout-cartQuantity"
-              href="amazon.html">
+              href="index.html">
               ${countQuantity()} items
               </a>
               
