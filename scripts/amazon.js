@@ -8,13 +8,6 @@ renderDetails.innerHTML = `
   </div>
 `;
 
-// renderDetails.style.display = "flex";
-// renderDetails.style.justifyContent = "center";
-// renderDetails.style.alignItems = "center";
-// renderDetails.style.minHeight = "300px"; // important for vertical centering
-// renderDetails.style.fontSize = "20px";
-// renderDetails.style.fontWeight = "500";
-
 loadProducts(() => {
   renderProductsGrid();
 });
@@ -76,14 +69,6 @@ function renderProductsGrid() {
 `;
   });
   renderDetails.innerHTML = productsHTML;
-
-  // // remove ONLY inline styles you added
-  // renderDetails.style.display = "";
-  // renderDetails.style.justifyContent = "";
-  // renderDetails.style.alignItems = "";
-  // renderDetails.style.minHeight = "";
-  // renderDetails.style.fontSize = "";
-  // renderDetails.style.fontWeight = "";
 
   function updateCartQuantity() {
     let cartQuantity = 0;
