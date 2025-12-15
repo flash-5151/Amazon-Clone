@@ -4,6 +4,7 @@
 
 .products-grid {
   display: grid;
+  position: relative;
 
   /* - In CSS Grid, 1fr means a column will take up the
        remaining space in the grid.
@@ -153,4 +154,29 @@
   width: 100%;
   padding: 8px;
   border-radius: 50px;
+}
+.loader-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #e0e0e0;
+  border-top: 5px solid #007185; /* Amazon blue */
+  border-radius: 50%;
+  animation: spin 0.75s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
