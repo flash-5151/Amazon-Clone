@@ -22,22 +22,52 @@ function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-export function addToCart(productId) {
-  let matchingItem;
-  cart.forEach((cartItem) => {
-    if (productId === cartItem.productId) {
+// export function addToCart(productId, quantity = 1) {
+//   let matchingItem;
+//   cart.forEach((cartItem) => {
+//     if (productId === cartItem.productId) {
+//       matchingItem = cartItem;
+//     }
+//   });
+//   if (matchingItem) {
+//     matchingItem.quantity += quantity;
+//   } else {
+//     cart.push({
+//       productId: productId,
+//       quantity: quantity,
+//       deliveryOptionId: "1",
+//     });
+//   }
+//   saveToStorage();
+// }
+
+export function addToCart(productId, quantity = 1) {
+  quantity = Number(quantity);
+
+  // safety guard
+  if (!Number.isFinite(quantity) || quantity < 1) {
+    quantity = 1;
+  }
+
+  let matchingItem = null;
+
+  for (const cartItem of cart) {
+    if (cartItem.productId === productId) {
       matchingItem = cartItem;
+      break;
     }
-  });
+  }
+
   if (matchingItem) {
-    matchingItem.quantity += 1;
+    matchingItem.quantity += quantity;
   } else {
     cart.push({
       productId: productId,
-      quantity: 1,
+      quantity: quantity,
       deliveryOptionId: "1",
     });
   }
+
   saveToStorage();
 }
 

@@ -139,3 +139,21 @@
     transform: rotate(360deg);
   }
 }
+.product-extra-links {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.product-extra-link {
+  margin-top: -7px;
+  font-size: 14px;
+  color: rgb(1, 124, 182);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.product-extra-link:hover {
+  color: rgb(196, 80, 0);
+  text-decoration: underline;
+}

@@ -39,13 +39,16 @@ class Clothing extends Product {
     super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
   }
-
   extraInfoHtml() {
     return `
-    <a href="${this.sizeChartLink}"
-    target="_blank"
-    >Size Chart</a>
-    `;
+    <a
+      href="${this.sizeChartLink}"
+      target="_blank"
+      class="product-extra-link"
+    >
+      Size Chart
+    </a>
+  `;
   }
 }
 
@@ -59,10 +62,15 @@ class Appliance extends Product {
   }
   extraInfoHtml() {
     return `
-    <a href="${this.instructionsLink}" target="_blank"> instructions</a>
-    <a href="${this.warrantyLink}" target="_blank"> warranty</a>
-
-    `;
+    <div class="product-extra-links">
+      <a href="${this.instructionsLink}" target="_blank" class="product-extra-link">
+        Instructions
+      </a>
+      <a href="${this.warrantyLink}" target="_blank" class="product-extra-link">
+        Warranty
+      </a>
+    </div>
+  `;
   }
 }
 

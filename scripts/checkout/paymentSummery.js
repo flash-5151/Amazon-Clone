@@ -60,28 +60,7 @@ export function renderPaymentSummery() {
     </button>
   `;
   document.querySelector(".js-payment-summary").innerHTML = paymentSummeryHTML;
-  //   document
-  //     .querySelector(".js-place-order")
-  //     .addEventListener("click", async () => {
-  //       try {
-  //         const response = await fetch("https://supersimplebackend.dev/orders", {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             cart: cart,
-  //           }),
-  //         });
-  //         const order = await response.json();
 
-  //         addOrder(order);
-  //       } catch (error) {
-  //         console.log("error");
-  //       }
-  //       window.location.href = "orders.html";
-  //     });
-  //
   document
     .querySelector(".js-place-order")
     .addEventListener("click", async () => {
