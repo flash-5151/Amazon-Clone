@@ -38,9 +38,14 @@
       </div>
 
       <div class="amazon-header-middle-section">
-        <input class="search-bar" type="text" placeholder="Search" />
+        <input
+          class="search-bar js-search-bar"
+          type="text"
+          placeholder="Search"
+          onkeydown="handleSearch(event)"
+        />
 
-        <button class="search-button">
+        <button class="search-button" onclick="searchItem()">
           <img class="search-icon" src="images/icons/search-icon.png" />
         </button>
       </div>

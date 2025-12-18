@@ -118,3 +118,62 @@ function updateCartQuantity() {
     cartQuantityElement.textContent = cartQuantity;
   }
 }
+
+function searchItem() {
+  const raw_input = document.querySelector(".js-search-bar");
+  const input = raw_input.value;
+  products.forEach((product) => {
+    if (input === product.name) {
+      renderDetails.innerHTML = `
+      <div class="product-container"> 
+        <div class="product-image-container">
+          <img class="product-image" src="${product.image}" />
+        </div>
+
+        <div class="product-name limit-text-to-2-lines">
+          ${product.name}
+        </div>
+
+        <div class="product-rating-container">
+          <img class="product-rating-stars" src="${product.getStarsUrl()}" />
+          <div class="product-rating-count link-primary">
+            ${product.rating.count}
+          </div>
+        </div>
+
+        <div class="product-price">${product.getPrice()}</div>
+
+        <div class="product-quantity-container">
+          <select class="js-quantity-selector-${product.id}">
+            ${Array.from(
+              { length: 10 },
+              (_, i) => `
+              <option value="${i + 1}" ${i === 0 ? "selected" : ""}>
+                ${i + 1}
+              </option>
+            `
+            ).join("")}
+          </select>
+        </div>
+
+        ${product.extraInfoHtml()}
+
+        <div class="product-spacer"></div>
+
+        <p class="js-add-animation-${product.id}"></p>
+
+        <button
+          class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">
+          Add to Cart
+        </button>
+      </div>
+    `;
+    }
+  });
+}
+function handleSearch(event) {
+  if (event.key === "Enter") {
+    searchItem();
+  }
+}
