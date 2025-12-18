@@ -121,9 +121,11 @@ function updateCartQuantity() {
 
 window.searchItem = () => {
   const raw_input = document.querySelector(".js-search-bar");
+  let count = 0;
   const input = raw_input.value;
   products.forEach((product) => {
     if (input === product.name) {
+      count++;
       renderDetails.innerHTML = `
       <div class="product-container"> 
         <div class="product-image-container">
@@ -171,6 +173,9 @@ window.searchItem = () => {
     `;
     }
   });
+  if (count == 0) {
+    renderDetails.innerHTML = "NOT FOUND";
+  }
 };
 window.handleSearch = (event) => {
   if (event.key === "Enter") {
