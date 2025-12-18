@@ -119,7 +119,7 @@ function updateCartQuantity() {
   }
 }
 
-function searchItem() {
+window.searchItem = () => {
   const raw_input = document.querySelector(".js-search-bar");
   const input = raw_input.value;
   products.forEach((product) => {
@@ -171,9 +171,9 @@ function searchItem() {
     `;
     }
   });
-}
-function handleSearch(event) {
+};
+window.handleSearch = (event) => {
   if (event.key === "Enter") {
     searchItem();
   }
-}
+};
