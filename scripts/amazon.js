@@ -118,16 +118,16 @@ function updateCartQuantity() {
     cartQuantityElement.textContent = cartQuantity;
   }
 }
-
 window.searchItem = () => {
   const raw_input = document.querySelector(".js-search-bar");
+  const renderResult = document.querySelector(".main");
   let count = 0;
-  const input = raw_input.value;
+  const input = raw_input.value.toLowerCase();
   products.forEach((product) => {
-    if (input === product.name) {
+    if (input === product.name.toLowerCase()) {
       count++;
-      renderDetails.innerHTML = `
-      <div class="product-container"> 
+      renderResult.innerHTML = `
+      <div class="product-container flex justify-center items-center"> 
         <div class="product-image-container">
           <img class="product-image" src="${product.image}" />
         </div>
@@ -174,11 +174,17 @@ window.searchItem = () => {
     }
   });
   if (count == 0) {
-    renderDetails.innerHTML = "NOT FOUND";
+    renderResult.innerHTML = `<div class=not-found-page>
+        <div class="not-found">NOT FOUND</div>
+        <a href="index.html" class="go-to-home" >Go to Home</a>
+      </div>
+  
+    `;
   }
+  attachAddToCartEvents();
 };
 window.handleSearch = (event) => {
-  if (event.key === "Enter") {
+  if (event.key == "Enter") {
     searchItem();
   }
 };

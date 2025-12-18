@@ -1,3 +1,12 @@
+@media (min-width: 768px) {
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 200px;
+  }
+}
 .main {
   margin-top: 60px;
 }
@@ -121,7 +130,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
+  min-height: 100px;
   background: white;
 }
 
@@ -156,4 +165,26 @@
 .product-extra-link:hover {
   color: rgb(196, 80, 0);
   text-decoration: underline;
+}
+
+.not-found {
+  color: red;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+.go-to-home {
+  color: blue;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.go-to-home:hover {
+  padding: 2px;
+  border: 2px solid rgb(5, 5, 82);
+  background-color: #85d4e2;
+}
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
